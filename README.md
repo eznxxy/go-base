@@ -6,7 +6,6 @@
   <img src="https://img.shields.io/badge/gorm-v1.25-green" height="25"/>
   <img src="https://img.shields.io/badge/swagger-v1.16-orange" height="25"/>
   <img src="https://img.shields.io/badge/gin--jwt-v2.9-yellow" height="25"/>
-  <img src="https://img.shields.io/badge/docker-support-darkgreeen" height="25"/>
 </p>
 
 It's an API Skeleton project based on Echo framework.
@@ -81,7 +80,7 @@ violations of generally accepted code style
 5. The quality of the code is guaranteed at a fairly high level.
 
 ### How to use
-Linter tool wrapped to docker-compose and first of all need to build container with linters
+First of all need to build container with linters
 
 - `make lint-build`
 
@@ -103,7 +102,7 @@ Swagger - https://github.com/swaggo/echo-swagger
 
 Mocking db - https://github.com/selvatico/go-mocket
 
-Orm - https://gorm.io/gorm
+Orm - https://gorm.io
 
 ## License
 

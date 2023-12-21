@@ -22,22 +22,11 @@ There is a useful set of tools that described below. Feel free to contribute!
 - Request validation
 - Swagger docs
 - Environment configuration
-- Docker development environment
 
 ## Usage
-1. Copy .env.dist to .env and set the environment variables. There are examples for all the environment variables except COMPOSE_USER_ID, COMPOSE_GROUP_ID which are used by the linter. To get the current user ID, run in terminal:
-    
-    `echo $UID`
-    
-    In the .env file set these variables:
-
-    `COMPOSE_USER_ID="username in current system"` - your username in system
-
-    `COMPOSE_GROUP_ID="user uid"` - the user ID which you got in the terminal
-
-2. Run your application using the command in the terminal:
-
-    `docker-compose up`
+1. Copy .env.dist to .env and set the environment variables.
+2. Init the swag using this command:
+    `swag init -g ./cmd/main.go --output ./docs`
 3. Browse to {HOST}:{PORT}/swagger/index.html. You will see Swagger 2.0 API documents.
 4. Using the API documentation, make requests to register a user (if necessary) and login.
 5. After the successful login, copy a token from the response, then click "Authorize" and in a popup that opened, enter the value for "apiKey" in a form:
@@ -56,10 +45,6 @@ Now, you are able to make requests which require authentication.
 2. **/config** has structures which contains service config.
 
 3. **/db** has seeders and method for connecting to the database.
-
-4. **/deploy** contains the container (Docker) package configuration and template(docker-compose) for project deployment.
-
-5. **/development** includes Docker and docker-compose files for setup linter.
 
 6. **/migrations** has files for run migrations.
 

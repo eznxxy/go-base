@@ -3,7 +3,7 @@ package user
 import (
 	"github.com/eznxxy/go-base/requests"
 
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 )
 
 type ServiceWrapper interface {

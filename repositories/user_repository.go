@@ -3,7 +3,7 @@ package repositories
 import (
 	"github.com/eznxxy/go-base/models"
 
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 )
 
 type UserRepositoryQ interface {

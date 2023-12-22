@@ -4,7 +4,7 @@ import (
 	"github.com/eznxxy/go-base/models"
 	"github.com/eznxxy/go-base/requests"
 
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 )
 
 type ServiceWrapper interface {

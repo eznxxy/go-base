@@ -11,8 +11,9 @@ import (
 	s "github.com/eznxxy/go-base/server"
 	tokenservice "github.com/eznxxy/go-base/services/token"
 
-	jwtGo "github.com/dgrijalva/jwt-go"
 	"github.com/labstack/echo/v4"
+
+	jwtGo "github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -25,16 +26,17 @@ func NewAuthHandler(server *s.Server) *AuthHandler {
 }
 
 // Login godoc
-// @Summary Authenticate a user
-// @Description Perform user login
-// @ID user-login
-// @Tags User Actions
-// @Accept json
-// @Produce json
-// @Param params body requests.LoginRequest true "User's credentials"
-// @Success 200 {object} responses.LoginResponse
-// @Failure 401 {object} responses.Error
-// @Router /login [post]
+//
+//	@Summary		Authenticate a user
+//	@Description	Perform user login
+//	@ID				user-login
+//	@Tags			User Actions
+//	@Accept			json
+//	@Produce		json
+//	@Param			params	body		requests.LoginRequest	true	"User's credentials"
+//	@Success		200		{object}	responses.LoginResponse
+//	@Failure		401		{object}	responses.Error
+//	@Router			/login [post]
 func (authHandler *AuthHandler) Login(c echo.Context) error {
 	loginRequest := new(requests.LoginRequest)
 
@@ -68,17 +70,18 @@ func (authHandler *AuthHandler) Login(c echo.Context) error {
 	return responses.Response(c, http.StatusOK, res)
 }
 
-// Refresh godoc
-// @Summary Refresh access token
-// @Description Perform refresh access token
-// @ID user-refresh
-// @Tags User Actions
-// @Accept json
-// @Produce json
-// @Param params body requests.RefreshRequest true "Refresh token"
-// @Success 200 {object} responses.LoginResponse
-// @Failure 401 {object} responses.Error
-// @Router /refresh [post]
+// RefreshToken godoc
+//
+//	@Summary		Refresh access token
+//	@Description	Perform refresh access token
+//	@ID				user-refresh
+//	@Tags			User Actions
+//	@Accept			json
+//	@Produce		json
+//	@Param			params	body		requests.RefreshRequest	true	"Refresh token"
+//	@Success		200		{object}	responses.LoginResponse
+//	@Failure		401		{object}	responses.Error
+//	@Router			/refresh [post]
 func (authHandler *AuthHandler) RefreshToken(c echo.Context) error {
 	refreshRequest := new(requests.RefreshRequest)
 	if err := c.Bind(refreshRequest); err != nil {

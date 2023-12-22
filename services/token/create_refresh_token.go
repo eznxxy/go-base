@@ -5,14 +5,14 @@ import (
 
 	"github.com/eznxxy/go-base/models"
 
-	"github.com/dgrijalva/jwt-go"
+	"github.com/golang-jwt/jwt/v5"
 )
 
 func (tokenService *Service) CreateRefreshToken(user *models.User) (t string, err error) {
 	claimsRefresh := &JwtCustomRefreshClaims{
 		ID: user.ID,
-		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: time.Now().Add(time.Hour * ExpireRefreshCount).Unix(),
+		RegisteredClaims: jwt.RegisteredClaims{
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Hour * ExpireRefreshCount)),
 		},
 	}
 	refreshToken := jwt.NewWithClaims(jwt.SigningMethodHS256, claimsRefresh)

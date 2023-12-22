@@ -4,8 +4,8 @@ import (
 	"github.com/eznxxy/go-base/config"
 	"github.com/eznxxy/go-base/db"
 
-	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo/v4"
+	"gorm.io/gorm"
 )
 
 type Server struct {

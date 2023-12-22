@@ -1,9 +1,16 @@
 package routes
 
 import (
+	"fmt"
+
 	s "github.com/eznxxy/go-base/server"
 	"github.com/eznxxy/go-base/server/handlers"
+	"github.com/eznxxy/go-base/services/token"
+
+	"github.com/golang-jwt/jwt/v5"
 	echojwt "github.com/labstack/echo-jwt/v4"
+	"github.com/labstack/echo/v4"
+
 	"github.com/labstack/echo/v4/middleware"
 	echoSwagger "github.com/swaggo/echo-swagger"
 )
@@ -21,10 +28,17 @@ func ConfigureRoutes(server *s.Server) {
 	server.Echo.POST("/register", registerHandler.Register)
 	server.Echo.POST("/refresh", authHandler.RefreshToken)
 
+	fmt.Println(server.Config.Auth.AccessSecret)
+
 	r := server.Echo.Group("")
-	r.Use(echojwt.WithConfig(echojwt.Config{
+	// Configure middleware with the custom claims type
+	config := echojwt.Config{
+		NewClaimsFunc: func(c echo.Context) jwt.Claims {
+			return new(token.JwtCustomClaims)
+		},
 		SigningKey: []byte(server.Config.Auth.AccessSecret),
-	}))
+	}
+	r.Use(echojwt.WithConfig(config))
 
 	r.GET("/posts", postHandler.GetPosts)
 	r.POST("/posts", postHandler.CreatePost)

@@ -6,8 +6,8 @@ import (
 	"github.com/eznxxy/go-base/config"
 	"github.com/eznxxy/go-base/db/seeders"
 
-	_ "github.com/go-sql-driver/mysql" // nolint
-	"github.com/jinzhu/gorm"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
 
 func Init(cfg *config.Config) *gorm.DB {
@@ -18,7 +18,9 @@ func Init(cfg *config.Config) *gorm.DB {
 		cfg.DB.Port,
 		cfg.DB.Name)
 
-	db, err := gorm.Open(cfg.DB.Driver, dataSourceName)
+	fmt.Println(dataSourceName)
+
+	db, err := gorm.Open(mysql.Open(dataSourceName), &gorm.Config{})
 	if err != nil {
 		panic(err.Error())
 	}

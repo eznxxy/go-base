@@ -8,9 +8,9 @@ import (
 	"github.com/eznxxy/go-base/docs"
 )
 
-//	@title			Echo Demo App
+//	@title			Echo Base App
 //	@version		1.0
-//	@description	This is a demo version of Echo app.
+//	@description	This is a base-code (ready to go).
 
 //	@contact.name	NIX Solutions
 //	@contact.url	https://www.nixsolutions.com/

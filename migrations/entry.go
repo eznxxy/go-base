@@ -13,6 +13,7 @@ func main() {
 
 func getMigrationsList() []gmStore.Migratable {
 	return []gmStore.Migratable{
+		&list.CreateRoleTable{},
 		&list.CreateUserTable{},
 		&list.CreatePostTable{},
 		&list.UpdateUserTable{},

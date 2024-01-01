@@ -1,35 +1,29 @@
 package list
 
 import (
-	"github.com/ShkrutDenis/go-migrations/builder"
+	mysql "github.com/ShkrutDenis/go-migrations/builder"
 	"github.com/jmoiron/sqlx"
 )
 
-type CreateExampleTable struct{}
+type CreateRoleTable struct{}
 
-func (m *CreateExampleTable) GetName() string {
-	// Name of migration.
-	// It will be stored to DB, must be unique.
-	return "CreateExampleTable"
+func (m *CreateRoleTable) GetName() string {
+	return "CreateRoleTable"
 }
 
-func (m *CreateExampleTable) Up(con *sqlx.DB) {
-	// Create new table
-	table := builder.NewTable("example", con)
-	// Add primary key. It will be created column with type int and autoincrement.
+func (m *CreateRoleTable) Up(con *sqlx.DB) {
+	table := mysql.NewTable("roles", con)
+	table.Column("id").Type("int unsigned").Autoincrement()
 	table.PrimaryKey("id")
-	// Nullable column with default value. String(,n) => varchar(n).
-	table.String("name", 100).Nullable().Default("value")
-	// Builder has few predefined methods with type declaration.
-	// Any way, you can use Column().Type() methods for create column with any type.
-	table.Integer("count").Default("0")
-	// Unique column
-	table.Column("email").Type("varchar(50)").Unique()
-	// Execute queries
+	table.String("name", 255)
+	table.Column("permissions").Type("text").Nullable()
+	table.Column("has_full_access").Type("boolean").Default("false")
+	table.Column("deleted_at").Type("datetime").Nullable()
+	table.WithTimestamps()
+
 	table.MustExec()
 }
 
-func (m *CreateExampleTable) Down(con *sqlx.DB) {
-	// Drop table
-	builder.DropTable("example", con).MustExec()
+func (m *CreateRoleTable) Down(con *sqlx.DB) {
+	mysql.DropTable("roles", con).MustExec()
 }

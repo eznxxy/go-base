@@ -25,6 +25,8 @@ func Init(cfg *config.Config) *gorm.DB {
 		panic(err.Error())
 	}
 
+	roleSeeder := seeders.NewRoleSeeder(db)
+	roleSeeder.SetRoles()
 	userSeeder := seeders.NewUserSeeder(db)
 	userSeeder.SetUsers()
 

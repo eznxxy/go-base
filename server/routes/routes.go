@@ -17,6 +17,7 @@ import (
 
 func ConfigureRoutes(server *s.Server) {
 	postHandler := handlers.NewPostHandlers(server)
+	roleHandler := handlers.NewRoleHandlers(server)
 	authHandler := handlers.NewAuthHandler(server)
 	registerHandler := handlers.NewRegisterHandler(server)
 
@@ -44,4 +45,9 @@ func ConfigureRoutes(server *s.Server) {
 	r.POST("/posts", postHandler.CreatePost)
 	r.DELETE("/posts/:id", postHandler.DeletePost)
 	r.PUT("/posts/:id", postHandler.UpdatePost)
+
+	r.GET("/roles", roleHandler.GetRoles)
+	r.POST("/roles", roleHandler.CreateRole)
+	r.DELETE("/roles/:id", roleHandler.DeleteRole)
+	r.PUT("/role/:id", roleHandler.UpdateRole)
 }

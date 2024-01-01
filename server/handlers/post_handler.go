@@ -89,7 +89,7 @@ func (p *PostHandlers) DeletePost(c echo.Context) error {
 	postService := postservice.NewPostService(p.server.DB)
 	postService.Delete(&post)
 
-	return responses.MessageResponse(c, http.StatusNoContent, "Post deleted successfully")
+	return responses.MessageResponse(c, http.StatusOK, "Post deleted successfully")
 }
 
 // GetPosts godoc
